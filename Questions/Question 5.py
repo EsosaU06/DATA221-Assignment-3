@@ -17,14 +17,14 @@ kidneyDisease_featureMatrix = pandas.get_dummies(kidneyDisease_featureMatrix,dty
 
 kidneyDisease_train, kidneyDisease_test, classification_train, classification_test = train_test_split(kidneyDisease_featureMatrix, kidneyDiseaseClassification_targetColumn, test_size=0.30, random_state=5)
 
+# the list of k-values given
 KValues = [1,3,5,7,9]
 
-KNNAccuracyList = []
+KNNAccuracyList = [] # put the resulting accuracy scores here
 
 for KValue in KValues:
     # train the model from each K Value
     kidneyDiseaseKNNModel = KNeighborsClassifier(n_neighbors=KValue)
-    
     kidneyDiseaseKNNModel.fit(kidneyDisease_featureMatrix, kidneyDiseaseClassification_targetColumn)
     
     #  the model then predicts the labels from the X test data
@@ -36,19 +36,23 @@ for KValue in KValues:
 # create a table where each column corresponds to a kvalue and a result
 KValueTable = pandas.DataFrame([KValues, KNNAccuracyList], index=["K-Value","Accuracy Score"])
 
-print(KValueTable)
+print(KValueTable) # output:
+"""
+                  0         1         2         3         4
+K-Value         1.0  3.000000  5.000000  7.000000  9.000000
+Accuracy Score  1.0  0.991667  0.983333  0.983333  0.983333
+"""
+###
 
-'''
+"""
 The highest accuracy score comes from the model trained with 1 nearest neighbour.
-The model with the second highest accuracy uses 3. Then the same
-accuracy scores come rom the rest of the K values chosen; 5,7, and 9.
+The model with the second highest accuracy score uses 3. Then the same
+accuracy scores come rom the rest of the K values chosen (5,7, and 9).
 Changing the value of k affects how many nearby points (neighbours) the model uses
 to predict a value. A higher K means more neighbours are used.
 
 Very small values of K may cause overfitting because it only has one data point to learn from.
-As a result, the not does not generalize the data it learns from because
-it has less values to make an average from.
+As a result, the not does not generalize the data it learns from.
 While very large values of k may cause underfitting because it will take
-from too many points. This will lead to overgeneralizing instead.
-
-'''
+from too many points. This will lead to overgeneralizing.
+"""
