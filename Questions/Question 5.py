@@ -39,11 +39,16 @@ KValueTable = pandas.DataFrame([KValues, KNNAccuracyList], index=["K-Value","Acc
 print(KValueTable)
 
 '''
-The highest accuracy score comes from the model trained with 1 nearest neighbour. The model with the second highest accuracy uses 3.
-Then 5,7, and 9.
-Changing the value of k affects how
-Very small values of k may cause overfitting because it only has one data point to learn from.
-While very large values of k may cause underfitting because it will take inormation
-from too many data points, which leads to 
+The highest accuracy score comes from the model trained with 1 nearest neighbour.
+The model with the second highest accuracy uses 3. Then the same
+accuracy scores come rom the rest of the K values chosen; 5,7, and 9.
+Changing the value of k affects how many nearby points (neighbours) the model uses
+to predict a value. A higher K means more neighbours are used.
+
+Very small values of K may cause overfitting because it only has one data point to learn from.
+As a result, the not does not generalize the data it learns from because
+it has less values to make an average from.
+While very large values of k may cause underfitting because it will take
+from too many points. This will lead to overgeneralizing instead.
 
 '''
